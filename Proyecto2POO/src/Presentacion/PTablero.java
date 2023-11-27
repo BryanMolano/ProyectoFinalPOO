@@ -25,11 +25,11 @@ public class PTablero extends JPanel implements MouseListener {
     private int[][] matrizJuego;
 
     private int turno=2;
-
-    public PTablero(Othello othello) {
+    private FOthello fOthello;
+    public PTablero(Othello othello, FOthello fOthello) {
         this.othello = othello;
+        this.fOthello = fOthello;
 		this.addMouseListener(this);
-		
 
 	  }
 	
@@ -51,10 +51,10 @@ public class PTablero extends JPanel implements MouseListener {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     if (this.matrizJuego[i][j] == 1) {
-                        Image img = new ImageIcon("img/millonarios.png").getImage();
+                        Image img = new ImageIcon("img/fichaFNegra.png").getImage();
                         g2d.drawImage(img, j * this.getWidth() / 8, i * this.getHeight() / 8, this.getWidth() / 8, this.getHeight() / 8, this);
                     } else if (this.matrizJuego[i][j] == 2) {
-                        Image img = new ImageIcon("img/nacional.png").getImage();
+                        Image img = new ImageIcon("img/fichaFBlanca.png").getImage();
                         g2d.drawImage(img, j * this.getWidth() / 8, i * this.getHeight() / 8, this.getWidth() / 8, this.getHeight() / 8, this);
                     }
                 }
@@ -89,9 +89,11 @@ public class PTablero extends JPanel implements MouseListener {
 				setTurno(getTurno() + 1);
 		        othello.actualizarMovimientosLegales(1, othello.NsugeridasN);
 		        othello.actualizarMovimientosLegales(2, othello.BsugeridasB);
+		        fOthello.actualizarNumeroFichas();
 				othello.mostrarMatriz();
 				othello.mostrarSugeridasNegras();
 				othello.mostrarSugeridasBlancas();
+				
 				}
 		} else {
 			if (othello.esMovimientoLegalBlancas(coord2, coord1)) {
@@ -101,7 +103,7 @@ public class PTablero extends JPanel implements MouseListener {
 				setTurno(getTurno() + 1);
 		        othello.actualizarMovimientosLegales(1, othello.NsugeridasN);
 		        othello.actualizarMovimientosLegales(2, othello.BsugeridasB);
-
+		        fOthello.actualizarNumeroFichas();
 				othello.mostrarMatriz();
 				othello.mostrarSugeridasNegras();
 				othello.mostrarSugeridasBlancas();
@@ -130,7 +132,6 @@ public class PTablero extends JPanel implements MouseListener {
 	}
 	
 		      
-
 	public void actualizarTablero() {
 	    this.matrizJuego = this.othello.getMatriz();
 	    this.repaint();

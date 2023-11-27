@@ -16,6 +16,9 @@ public class Othello {
 	
 	public ArrayList<String> NsugeridasN;
 	public ArrayList<String> BsugeridasB;
+	private int contadorFichasBlancas=0;
+	private int contadorFichasNegras=0;
+
 	
 	public Othello() {
 		this.BsugeridasB = new ArrayList<String>();
@@ -24,12 +27,33 @@ public class Othello {
 		this.actualizarMovimientosLegales(2, BsugeridasB);
 		this.mostrarMatriz();
 		this.mostrarSugeridasNegras();
-		this.mostrarSugeridasBlancas();
-
+		this.mostrarSugeridasBlancas();	
+	}
+	public int verFichasBlancas() {
+		contadorFichasBlancas=0;
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				if(matriz[i][j]==2) {
+					contadorFichasBlancas++;
+					
+				}
+			}
+		}
 		
+		return contadorFichasBlancas;
 		
 	}
-
+	public int verFichasNegras() {
+		contadorFichasNegras=0;
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				if(matriz[i][j]==1) {
+					contadorFichasNegras++;
+				}
+			}
+		}
+		return contadorFichasNegras;
+	}
 
 	public int[][] getMatriz() {
 		return matriz;
@@ -81,7 +105,7 @@ public class Othello {
 	}
 	
 	public boolean esMovimientoLegalBlancas(int x, int y) {
-		String coordenadaClick = x + "," + y;
+		String coordenadaClick =x + "," + y;
 		for(String fichaSugeridaBlanca: BsugeridasB) {
 			if(fichaSugeridaBlanca.equals(coordenadaClick)) {
 				BsugeridasB.removeAll(BsugeridasB);
@@ -164,6 +188,14 @@ public class Othello {
 	            }
 	        }
 	    }
+	}
+
+	public int getContadorFichasBlancas() {
+		return contadorFichasBlancas;
+	}
+
+	public void setContadorFichasBlancas(int contadorFichasBlancas) {
+		this.contadorFichasBlancas = contadorFichasBlancas;
 	}
 }
 
