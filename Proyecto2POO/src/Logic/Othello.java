@@ -197,5 +197,16 @@ public class Othello {
 	public void setContadorFichasBlancas(int contadorFichasBlancas) {
 		this.contadorFichasBlancas = contadorFichasBlancas;
 	}
+	public boolean seguirJugando() {
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				if(matriz[i][j]==0) {
+					return true;
+					
+				}
+			}
+		}
+		return false;
+	}
 }
 
